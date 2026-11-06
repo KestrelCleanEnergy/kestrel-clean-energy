@@ -31,10 +31,10 @@
     .brand img{width:210px;display:block}
     .nav-links{display:flex;align-items:center;gap:28px;font-size:15px}
     .nav-links a{text-decoration:none;color:#35535b}
-    .concierge-login{
+    .nav-links .concierge-login{
       display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
-      padding:9px 16px;border:1px solid #5D6870;border-radius:999px;
-      color:#5D6870;background:#EAF3F5;line-height:1.35;cursor:default;white-space:nowrap
+      padding:9px 16px;border:1px solid #003E4A;border-radius:999px;
+      color:#003E4A;background:#EAF3F5;line-height:1.35;cursor:pointer;white-space:nowrap
     }
     .concierge-login small{font-size:11px;font-weight:400}
     .concierge-login:focus-visible{outline:3px solid #003E4A;outline-offset:3px}
@@ -124,7 +124,7 @@
       .hero-grid,.interest,.grant{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
       .journey{grid-template-columns:1fr 1fr}
-      .nav-links a:not(.btn){display:none}
+      .nav-links a:not(.btn):not(.concierge-login){display:none}
     }
     @media(max-width:620px){
       .wrap{width:min(100% - 24px,1180px)}
@@ -152,11 +152,9 @@
       <a href="#approach">Our approach</a>
       <a href="#grants">Grants</a>
       <a href="#interest" class="btn primary">Register interest</a>
-      <!-- Enable only after verifying the released app's HTTPS sign-in page. -->
-      <span class="concierge-login" role="link" aria-disabled="true" tabindex="0"
-            aria-describedby="concierge-login-status">Concierge Login
-        <small id="concierge-login-status">Not yet available</small>
-      </span>
+      <a class="concierge-login" href="https://kestrel-concierge.onrender.com/">Concierge Login
+        <small>Staff access</small>
+      </a>
     </nav>
   </div>
 </header>
