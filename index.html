@@ -100,13 +100,24 @@
     @media(max-width:900px){.hero-grid,.interest,.grant{grid-template-columns:1fr}.hero-grid{gap:40px}.grid3{grid-template-columns:1fr}.journey{grid-template-columns:1fr 1fr}.nav-links a:not(.btn):not(.concierge-login){display:none}}
     @media(max-width:620px){html{scroll-padding-top:185px}.wrap{width:min(100% - 24px,1180px)}.nav{flex-wrap:wrap;justify-content:center;gap:12px;padding:12px 0}.nav-links{width:100%;justify-content:center;flex-wrap:wrap;gap:10px}.nav-links .btn{padding:12px 16px}.hero{padding:44px 0 52px}.brand img{width:180px}h1{font-size:36px;line-height:1.1}.hero-card{min-height:400px;padding:28px}.hero-card h2{font-size:30px}.journey{grid-template-columns:1fr}form{grid-template-columns:1fr}.full{grid-column:auto}.interest{padding:24px}.interest h2{font-size:32px}.footer-grid{align-items:flex-start;flex-direction:column}section{padding:56px 0}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+    html{scroll-padding-top:220px}
+    .brand{margin:10px 0}
+    @media(max-width:620px){html{scroll-padding-top:370px}}
+    /* Show the supplied approved raster without changing its artwork.
+       Layout boxes remove only the surrounding white margin. */
+    .brand,.colour-logo{display:block;width:210px;height:185px;overflow:hidden;flex-shrink:0}
+    .brand img,.colour-logo img{display:block;width:320px;max-width:none;height:auto;padding:0;background:white;border-radius:0;transform:translate(-55px,-10px)}
+    .hero-logo{background:white;border-radius:12px;width:190px;height:170px}
+    .hero-logo img{width:294px;transform:translate(-51px,-9px)}
+    @media(max-width:620px){.brand img{width:320px}.nav{gap:4px}}
   </style>
 </head>
 <body>
 <header>
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="Kestrel Clean Energy home">
-      <img src="logo-primary.png" alt="Kestrel Clean Energy">
+      <img src="logo-colour-approved.png" alt="Kestrel Clean Energy">
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="#approach">Our approach</a>
@@ -137,7 +148,7 @@
 
       <aside class="hero-card">
         <div>
-          <img src="logo-icon.png" alt="">
+          <div class="colour-logo hero-logo"><img src="logo-colour-approved.png" alt=""></div>
           <h2>A concierge approach to home energy.</h2>
           <p>One accountable team to help you understand the options, assess your property, engineer the system and coordinate delivery.</p>
         </div>
@@ -281,7 +292,7 @@
 <footer>
   <div class="wrap footer-grid">
     <div>
-      <img src="logo-primary.png" alt="Kestrel Clean Energy">
+      <div class="colour-logo footer-logo"><img src="logo-colour-approved.png" alt="Kestrel Clean Energy"></div>
       <p>Kestrel Clean Energy Limited</p>
       <p>Heating • Cooling • Home Energy</p>
     </div>
