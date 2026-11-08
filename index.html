@@ -111,6 +111,19 @@
     .hero-logo{background:white;border-radius:12px;width:190px;height:170px}
     .hero-logo img{width:294px;transform:translate(-51px,-9px)}
     @media(max-width:620px){.brand img{width:320px}.nav{gap:4px}}
+  
+    /* Small inline vectors: no image requests or animation library. */
+    .feature-icon{width:96px;height:96px;border-radius:18px;background:white;color:var(--ink);display:grid;place-items:center;margin-bottom:24px}
+    .card .num{margin-bottom:16px}
+    .card .num:before{display:none}
+    @media(prefers-reduced-motion:no-preference){
+      .feature-icon{transition:transform .22s ease-out}
+      .feature-icon.motion-ready{opacity:0;transform:translateY(14px)}
+      .feature-icon.motion-ready.is-revealed{animation:icon-enter .55s ease-out both}
+      @keyframes icon-enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    }
+    @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.card:hover .feature-icon:not(.motion-ready){transform:translateY(-4px) rotate(-2deg)}}
+    @media(prefers-reduced-motion:reduce){.feature-icon{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -172,16 +185,19 @@
       </div>
       <div class="grid3">
         <article class="card">
+          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M7 23 24 8l17 15M12 20v23h24V20M20 43V30h8v13M32 10v8"/></svg></div>
           <div class="num">01 — UNDERSTAND</div>
           <h3>Your home first</h3>
           <p>We start with the property, your comfort expectations and how you actually live — not with a predetermined product.</p>
         </article>
         <article class="card">
+          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M10 36 36 10l7 7-26 26H10zM30 16l7 7M13 32l5 5M19 26l5 5M25 20l5 5"/></svg></div>
           <div class="num">02 — ENGINEER</div>
           <h3>Designed to perform</h3>
           <p>Heat-loss, emitter and system decisions are treated as engineering choices. Cooling is considered where technically appropriate.</p>
         </article>
         <article class="card">
+          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="10" width="28" height="34" rx="4"/><rect x="18" y="6" width="14" height="8" rx="3"/><path d="m18 29 5 5 10-11"/></svg></div>
           <div class="num">03 — DELIVER</div>
           <h3>One accountable journey</h3>
           <p>Survey, design, grant route, installation and handover are coordinated as one customer experience rather than a chain of disconnected suppliers.</p>
@@ -323,6 +339,32 @@ ${f.get('message')}`
   document.getElementById('status').style.display = 'block';
   window.location.href = `mailto:hello@kestrelcleanenergy.com?subject=${subject}&body=${body}`;
 });
+</script>
+
+<script>
+(() => {
+  const icons = document.querySelectorAll('.feature-icon');
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (motion.matches || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const icon = entry.target;
+      icon.classList.add('is-revealed');
+      observer.unobserve(icon);
+      icon.addEventListener('animationend', () => {
+        icon.classList.remove('motion-ready', 'is-revealed');
+      }, {once:true});
+    });
+  }, {threshold:0.25});
+  icons.forEach(icon => {icon.classList.add('motion-ready'); observer.observe(icon);});
+  const stop = () => {
+    if (!motion.matches) return;
+    observer.disconnect();
+    icons.forEach(icon => icon.classList.remove('motion-ready', 'is-revealed'));
+  };
+  if (motion.addEventListener) motion.addEventListener('change', stop);
+})();
 </script>
 </body>
 </html>
